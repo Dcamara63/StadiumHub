@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Espn Headlines</title>
+    <script type="text/javascript"src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        // Example JSONP request with jQuery
+        $.ajax({
+            url: "http://api.espn.com/v1/sports/baseball/mlb/news/headlines",
+            data: {
+                // enter your developer api key here
+                apikey: "m9ug5cb4yufg88xv3su9k8sz",
+                // the type of data you're expecting back from the api
+                _accept: "application/json",
+                //no of headlines you want to retrive
+                limit: 30
+            },
+            dataType: "jsonp",
+            success: function (data) {
+                // create an unordered list of headlines
+                var ul = $('<ul/>');
+                $.each(data.headlines, function () {
+                    var content = '&nbsp<a href="' + this.links.web.href + '" >' +this.headline + '</a><br/>' + this.description+"<br/>";
+                    $.each(this.images, function () {
+                        content += '<img src="' + this.url + '" width="200px" height="200px">';
+                    });
+                    var li = $('<li/>').html(content);
+                    ul.append(li)
+                });
+                // append this list to the document body
+                $('#divnews').append(ul);
+            },
+            error: function () {
+                // handle the error
+            }
+        });
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <asp:Label ID="Label1" runat="server" Text="Espn Sports News Headlines"ForeColor="Red" Font-Size="X-Large"></asp:Label>
+        <div id="divnews" >
+        </div>
+    </div>
+    </form>
+</body>
+</html>
