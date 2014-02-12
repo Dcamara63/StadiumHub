@@ -28,29 +28,10 @@ public class Ordering extends HttpServlet {
 		getServletContext().setAttribute("entries", entries);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
-		List<ProductEntry> entries = (List<ProductEntry>) getServletContext()
-				.getAttribute("entries");
-		PrintWriter out = response.getWriter();
-		out.println("<html><head><title>Ordering</title></head><body>");
-		out.println("<form action = 'Ordering' method = 'post'>");
-		out.println("<table border = '1'>");
-		out.println("<tr><th>Item ID</th><th>Name</th><th>Price</th><th>Quantity</th></tr>");
-		out.println("<tr><td>1</td><td>Cheeseburger</td><td>$4.99</td>");
-		out.println("<td><input type='text' name='qty' value='0' /><input type='button' value='+' onclick='Add(document.frmMain.qty)'><input type='button' value='-' onclick='Minus(document.frmMain.qty)'></td></tr>");
-		for (ProductEntry entry : entries) {
-			out.println("<tr><td>" + entry.getProductId() + "</td><td>"
-					+ entry.getName() + "</td><td>" + entry.getPrice()
-					+ "</td>");
-			out.println("<td><input type='text' name='qty' value='0' /><input type='button' value='+' onclick='Add(document.frmMain.qty)'><input type='button' value='-' onclick='Minus(document.frmMain.qty)'></td></tr>");
-		}
-		out.println("</table><br />");
-		out.println("<input type='submit' name='order' value='Order' />");
-		out.println("</form>");
-		out.println("</body></html>");
+		request.getRequestDispatcher("/WEB-INF/Ordering.jsp").forward(
+				request, response);
 	}
 
 	protected void doPost(HttpServletRequest request,
