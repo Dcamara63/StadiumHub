@@ -30,7 +30,7 @@ public class Ordering extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/Ordering.jsp").forward(
+		request.getRequestDispatcher("/WEB-INF/Ordering.jsp").forward(
 				request, response);
 	}
 
