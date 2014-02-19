@@ -1,75 +1,97 @@
 package afds.model;
 
+import java.util.List;
+
 public class UserProfileEntry {
 
-	Integer id, age, creditCardId, seatId;
-	String firstName, lastName, gender;
+	Integer id, age;
+	String username, password, firstName, lastName, gender;
+	List<CreditCardEntry> creditCard;
+	List<LocationEntry> location;
 
-	public UserProfileEntry(Integer id, String firstName, String lastName,
-			Integer age, String gender, Integer creditCardId, Integer seatId) {
+	public UserProfileEntry(Integer id, String username, String password, String firstName, String lastName,
+			Integer age, String gender, List<CreditCardEntry> creditCard, List<LocationEntry> location) {
 		this.id = id;
+		this.username = username;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
 		this.gender = gender;
-		this.creditCardId = creditCardId;
-		this.seatId = seatId;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
+		this.creditCard = creditCard;
+		this.location = location;
 	}
 
 	public Integer getId() {
 		return id;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Integer getAge() {
 		return age;
 	}
 
-	public void setGender(String gender) {
-		this.gender = gender;
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getGender() {
 		return gender;
 	}
 
-	public void setCreditCardId(Integer creditCardId) {
-		this.creditCardId = creditCardId;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
-	public Integer getCreditCardId() {
-		return creditCardId;
+	public List<CreditCardEntry> getCreditCard() {
+		return creditCard;
 	}
 
-	public void setSeatId(Integer seatId) {
-		this.seatId = seatId;
+	public void setCreditCard(List<CreditCardEntry> creditCard) {
+		this.creditCard = creditCard;
 	}
 
-	public Integer getSeatId() {
-		return seatId;
+	public List<LocationEntry> getLocation() {
+		return location;
+	}
+
+	public void setLocation(List<LocationEntry> location) {
+		this.location = location;
 	}
 
 }

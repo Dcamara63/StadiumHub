@@ -45,7 +45,7 @@ public class Menu extends HttpServlet {
 					+ entry.getFilePath() + "</td></tr>");
 		}
 		out.println("</table>");
-		out.println("<p><a href='Ordering'>Order your food here.</a></p>");
+		out.println("<p><a href='OrderReview'>Order your food here.</a></p>");
 		out.println("</body></html>");
 	}
 
