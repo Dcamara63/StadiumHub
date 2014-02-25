@@ -49,7 +49,7 @@
 					<td><input name="creditCardNo" type="text" /></td>
 				</tr>
 				<tr>
-					<td>Expiration Time:</td>
+					<td>Expiration Time (MM/dd/yyyy):</td>
 					<td><input name="expirationTime" type="text" /></td>
 				</tr>
 				<tr>
@@ -64,6 +64,10 @@
 				<tr>
 					<td>City:</td>
 					<td><input name="city" type="text" /></td>
+				</tr>
+				<tr>
+					<td>State:</td>
+					<td><input name="state" type="text" /></td>
 				</tr>
 				<tr>
 					<td>Zipcode:</td>
@@ -113,6 +117,9 @@
 		<c:if test="${not empty lastNameEmptyError}">
 		${lastNameEmptyError}<br />
 		</c:if>
+		<c:if test="${ageEmptyError}">
+		${ageEmptyError}<br />
+		</c:if>
 		<c:if test="${not empty creditCardLengthError}">
 		${creditCardLengthError}<br />
 		</c:if>
@@ -130,6 +137,9 @@
 		</c:if>
 		<c:if test="${not empty cityEmptyError}">
 		${cityEmptyError}<br />
+		</c:if>
+		<c:if test="${not empty stateEmptyError}">
+		${stateEmptyError}<br />
 		</c:if>
 		<c:if test="${not empty zipcodeLengthError}">
 		${zipcodeLengthError}<br />

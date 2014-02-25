@@ -35,7 +35,7 @@ public class Ordering extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		response.sendRedirect("OrderReview.html");
+		response.sendRedirect("OrderReview");
 	}
 
 }

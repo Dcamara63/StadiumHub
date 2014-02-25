@@ -1,7 +1,11 @@
 package afds.controller;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletConfig;
@@ -19,16 +23,16 @@ import afds.model.UserProfileEntry;
 public class UserRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	Integer id = 1;
-	
+	Integer id = 0;
+
 	public UserRegistration() {
 		super();
 	}
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		List<UserProfileEntry> registrations = new ArrayList<UserProfileEntry>();
-		getServletContext().setAttribute("registrations", registrations);
+		List<UserProfileEntry> userProfiles = new ArrayList<UserProfileEntry>();
+		getServletContext().setAttribute("userProfiles", userProfiles);
 	}
 
 	protected void doGet(HttpServletRequest request,
@@ -45,17 +49,24 @@ public class UserRegistration extends HttpServlet {
 		String retypePassword = request.getParameter("retypePassword");
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
-		Integer age = Integer.parseInt(request.getParameter("age"));
+		String age = request.getParameter("age");
+		Integer newAge = null;
 		String gender = request.getParameter("gender");
 		String creditCardNo = request.getParameter("creditCardNo");
 		String expirationTime = request.getParameter("expirationTime");
+		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+		Date newExpirationTime = null;
 		String securityCode = request.getParameter("securityCode");
 		String address = request.getParameter("address");
 		String city = request.getParameter("city");
+		String state = request.getParameter("state");
 		String zipcode = request.getParameter("zipcode");
-		Integer sectionNo = Integer.parseInt(request.getParameter("sectionNo"));
-		Integer rowNo = Integer.parseInt(request.getParameter("rowNo"));
-		Integer seatNo = Integer.parseInt(request.getParameter("seatNo"));
+		String sectionNo = request.getParameter("sectionNo");
+		Integer newSectionNo = null;
+		String rowNo = request.getParameter("rowNo");
+		Integer newRowNo = null;
+		String seatNo = request.getParameter("seatNo");
+		Integer newSeatNo = null;
 		boolean hasError = false;
 		if (username.length() < 4) {
 			request.setAttribute("usernameLengthError",
@@ -92,6 +103,11 @@ public class UserRegistration extends HttpServlet {
 					"Last Name filed is empty.");
 			hasError = true;
 		}
+		if (age.isEmpty()) {
+			request.setAttribute("ageEmptyError", "Age filed is empty.");
+			hasError = true;
+		} else
+			newAge = Integer.parseInt(age);
 		if (creditCardNo.length() != 16) {
 			request.setAttribute("creditCardLengthError",
 					"Credit card number must be exactly 16 digits.");
@@ -111,52 +127,61 @@ public class UserRegistration extends HttpServlet {
 			request.setAttribute("expirationTimeEmptyError",
 					"Expiration time filed is empty.");
 			hasError = true;
-		}
+		} else
+			try {
+				newExpirationTime = formatter.parse(expirationTime);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
 		if (securityCode.isEmpty()) {
 			request.setAttribute("securityCodeEmptyError",
 					"Security code filed is empty.");
 			hasError = true;
 		}
 		if (address.isEmpty()) {
-			request.setAttribute("addressEmptyError",
-					"Address filed is empty.");
+			request.setAttribute("addressEmptyError", "Address filed is empty.");
 			hasError = true;
 		}
 		if (city.isEmpty()) {
-			request.setAttribute("cityEmptyError",
-					"City filed is empty.");
+			request.setAttribute("cityEmptyError", "City filed is empty.");
+			hasError = true;
+		}
+		if (state.isEmpty()) {
+			request.setAttribute("stateEmptyError", "State filed is empty.");
 			hasError = true;
 		}
 		if (zipcode.isEmpty()) {
-			request.setAttribute("zipcodeEmptyError",
-					"Zipcode filed is empty.");
+			request.setAttribute("zipcodeEmptyError", "Zipcode filed is empty.");
 			hasError = true;
 		}
-		if (sectionNo.toString().isEmpty()) {
+		if (sectionNo.isEmpty()) {
 			request.setAttribute("sectionNoEmptyError",
 					"Section Number filed is empty.");
 			hasError = true;
-		}
-		if (rowNo.toString().isEmpty()) {
+		} else
+			newSectionNo = Integer.parseInt(sectionNo);
+		if (rowNo.isEmpty()) {
 			request.setAttribute("rowNoEmptyError",
 					"Row Number filed is empty.");
 			hasError = true;
-		}
-		if (seatNo.toString().isEmpty()) {
+		} else
+			newRowNo = Integer.parseInt(rowNo);
+		if (seatNo.isEmpty()) {
 			request.setAttribute("seatNoEmptyError",
 					"Seat Number filed is empty.");
 			hasError = true;
-		}
-		List<CreditCardEntry> creditCard = new ArrayList<CreditCardEntry>();
-        creditCard = (List<CreditCardEntry>) new CreditCardEntry(id++, creditCardNo,
-				expirationTime, securityCode, address, city, zipcode);
-        List<LocationEntry> location = new ArrayList<LocationEntry>();
-		location = (List<LocationEntry>) new LocationEntry(id++, sectionNo, rowNo, seatNo);
-		UserProfileEntry userProfile = new UserProfileEntry(id++, username, password, firstName, lastName,
-				age, gender, creditCard, location);
+		} else
+			newSeatNo = Integer.parseInt(seatNo);
+		CreditCardEntry creditCard = new CreditCardEntry(id++, creditCardNo,
+				newExpirationTime, securityCode, address, city, state, zipcode);
+		LocationEntry location = new LocationEntry(id++, newSectionNo,
+				newRowNo, newSeatNo);
+		UserProfileEntry userProfile = new UserProfileEntry(id++, username,
+				password, firstName, lastName, newAge, gender, creditCard,
+				location);
 		List<UserProfileEntry> userProfiles = (List<UserProfileEntry>) getServletContext()
 				.getAttribute("userProfiles");
-		for (UserProfileEntry entry :userProfiles)
+		for (UserProfileEntry entry : userProfiles)
 			if (username.equals(entry.getUsername())) {
 				request.setAttribute("usernameExistsError",
 						"This username is already taken!");

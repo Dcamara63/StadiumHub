@@ -1,16 +1,14 @@
 package afds.model;
 
-import java.util.List;
-
 public class UserProfileEntry {
 
 	Integer id, age;
 	String username, password, firstName, lastName, gender;
-	List<CreditCardEntry> creditCard;
-	List<LocationEntry> location;
+	CreditCardEntry creditCard;
+	LocationEntry location;
 
 	public UserProfileEntry(Integer id, String username, String password, String firstName, String lastName,
-			Integer age, String gender, List<CreditCardEntry> creditCard, List<LocationEntry> location) {
+			Integer age, String gender, CreditCardEntry creditCard, LocationEntry location) {
 		this.id = id;
 		this.username = username;
 		this.password = password;
@@ -78,19 +76,19 @@ public class UserProfileEntry {
 		this.gender = gender;
 	}
 
-	public List<CreditCardEntry> getCreditCard() {
+	public CreditCardEntry getCreditCard() {
 		return creditCard;
 	}
 
-	public void setCreditCard(List<CreditCardEntry> creditCard) {
+	public void setCreditCard(CreditCardEntry creditCard) {
 		this.creditCard = creditCard;
 	}
 
-	public List<LocationEntry> getLocation() {
+	public LocationEntry getLocation() {
 		return location;
 	}
 
-	public void setLocation(List<LocationEntry> location) {
+	public void setLocation(LocationEntry location) {
 		this.location = location;
 	}
 

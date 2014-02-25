@@ -1,19 +1,23 @@
 package afds.model;
 
+import java.util.Date;
+
 public class CreditCardEntry {
 
 	Integer creditCardId;
-	String creditCardNo, expirationTime, securityCode, address, city, zipcode;
-
+	String creditCardNo, securityCode, address, city, state, zipcode;
+	Date expirationTime;
+	
 	public CreditCardEntry(Integer creditCardId, String creditCardNo,
-			String expirationTime, String securityCode, String address,
-			String city, String zipcode) {
+			Date expirationTime, String securityCode, String address,
+			String city, String state, String zipcode) {
 		this.creditCardId = creditCardId;
 		this.creditCardNo = creditCardNo;
 		this.expirationTime = expirationTime;
 		this.securityCode = securityCode;
 		this.address = address;
 		this.city = city;
+		this.state = state;
 		this.zipcode = zipcode;
 	}
 
@@ -33,11 +37,11 @@ public class CreditCardEntry {
 		this.creditCardNo = creditCardNo;
 	}
 
-	public String getExpirationTime() {
+	public Date getExpirationTime() {
 		return expirationTime;
 	}
 
-	public void setExpirationTime(String expirationTime) {
+	public void setExpirationTime(Date expirationTime) {
 		this.expirationTime = expirationTime;
 	}
 
@@ -63,6 +67,14 @@ public class CreditCardEntry {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+	
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public String getZipcode() {
