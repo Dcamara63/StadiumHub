@@ -9,8 +9,8 @@
 </head>
 <body>
 	<form action="OrderReview" method="post">
-		Please confirm the items you ordered before placing the order. You can
-		always go back to the menu to add or cancel items by clicking the
+		Please review the items you ordered before placing the order. You can
+		always go back to the menu to add or delete items by clicking the
 		"Back to the Menu" button.<br />
 		<table border='1'>
 			<tr>
@@ -28,6 +28,7 @@
 				</tr>
 			</c:forEach>
 		</table>
+		Total price (tax included): ${TotalPriceBeforeTax * 0.09 + TotalPriceBeforeTax}
 		<br />
 		<p>
 			<input type="submit" name="backToTheMenu" value="Back to the Menu" />

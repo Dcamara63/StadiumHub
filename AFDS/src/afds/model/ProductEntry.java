@@ -4,10 +4,10 @@ public class ProductEntry {
 
 	Integer productId;
 	String name, description, filePath;
-	Float price;
+	Double price;
 
 	public ProductEntry(Integer productId, String name, String description,
-			Float price, String filePath) {
+			Double price, String filePath) {
 		this.productId = productId;
 		this.name = name;
 		this.description = description;
@@ -39,11 +39,11 @@ public class ProductEntry {
 		return description;
 	}
 
-	public void setPrice(Float price) {
+	public void setPrice(Double price) {
 		this.price = price;
 	}
 
-	public Float getPrice() {
+	public Double getPrice() {
 		return price;
 	}
 
