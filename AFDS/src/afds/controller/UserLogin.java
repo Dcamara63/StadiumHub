@@ -13,12 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import afds.model.UserProfileEntry;
 
-@WebServlet("/Login")
-public class Login extends HttpServlet {
+@WebServlet("/UserLogin")
+public class UserLogin extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 
-	public Login() {
+	public UserLogin() {
 		super();
 	}
 
@@ -30,7 +30,7 @@ public class Login extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		request.getRequestDispatcher("/WEB-INF/Login.jsp").forward(request,
+		request.getRequestDispatcher("/WEB-INF/UserLogin.jsp").forward(request,
 				response);
 	}
 

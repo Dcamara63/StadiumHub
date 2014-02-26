@@ -192,6 +192,6 @@ public class UserRegistration extends HttpServlet {
 			return;
 		}
 		userProfiles.add(userProfile);
-		response.sendRedirect("Login");
+		response.sendRedirect("UserLogin");
 	}
 }
