@@ -46,7 +46,7 @@ public class UserLogin extends HttpServlet {
 		} else if (request.getParameter("username").equals("cs320stu31")
 				&& request.getParameter("password").equals("abcd")) {
 			request.getSession().setAttribute("user", "cs320stu31");
-			response.sendRedirect("DisplayCourses");
+			response.sendRedirect("OrderConfirmation");
 		} else if (!(request.getParameter("username").equals("cysun"))
 				&& !(request.getParameter("password").equals("abcd"))
 				|| !(request.getParameter("username").equals("cs320stu31"))
@@ -58,7 +58,7 @@ public class UserLogin extends HttpServlet {
 								registration.getPassword())) {
 					request.getSession().setAttribute("user",
 							registration.getUsername());
-					response.sendRedirect("DisplayCourses");
+					response.sendRedirect("OrderConfirmation");
 				}
 				response.sendRedirect("UserLogin");
 			}
