@@ -59,7 +59,7 @@ public class OrderReview extends HttpServlet {
 					orders.add(order);
 				}
 			}
-			response.sendRedirect("registration/UserLogin");
+			response.sendRedirect("UserLogin");
 		}
 	}
 }

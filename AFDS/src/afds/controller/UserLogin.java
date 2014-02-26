@@ -60,12 +60,12 @@ public class UserLogin extends HttpServlet {
 							registration.getUsername());
 					response.sendRedirect("DisplayCourses");
 				}
-				response.sendRedirect("Login");
+				response.sendRedirect("UserLogin");
 			}
 		else if (registrations.isEmpty())
 			doGet(request, response);
 		else
-			response.sendRedirect("Login");
+			response.sendRedirect("UserLogin");
 	}
 
 }
