@@ -5,10 +5,11 @@ import java.util.Date;
 public class CreditCardEntry {
 
 	Integer creditCardId;
-	String creditCardNo, securityCode, address, city, state, zipcode;
+	Long creditCardNo;
+	String securityCode, address, city, state, zipcode;
 	Date expirationTime;
 	
-	public CreditCardEntry(Integer creditCardId, String creditCardNo,
+	public CreditCardEntry(Integer creditCardId, Long creditCardNo,
 			Date expirationTime, String securityCode, String address,
 			String city, String state, String zipcode) {
 		this.creditCardId = creditCardId;
@@ -29,11 +30,11 @@ public class CreditCardEntry {
 		this.creditCardId = creditCardId;
 	}
 
-	public String getCreditCardNo() {
+	public Long getCreditCardNo() {
 		return creditCardNo;
 	}
 
-	public void setCreditCardNo(String creditCardNo) {
+	public void setCreditCardNo(Long creditCardNo) {
 		this.creditCardNo = creditCardNo;
 	}
 

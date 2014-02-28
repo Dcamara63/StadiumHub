@@ -57,6 +57,7 @@ public class UserRegistration extends HttpServlet {
 		Integer newAge = null;
 		String gender = request.getParameter("gender");
 		String creditCardNo = request.getParameter("creditCardNo");
+		Long newCreditCardNo = null;
 		String expirationTime = request.getParameter("expirationTime");
 		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		Date newExpirationTime = null;
@@ -121,11 +122,13 @@ public class UserRegistration extends HttpServlet {
 					"Credit card number must be exactly 16 digits.");
 			hasError = true;
 		}
-		if (creditCardNo.isEmpty()) {
+		else if (creditCardNo.isEmpty()) {
 			request.setAttribute("creditCardNoEmptyError",
 					"Credit card number filed is empty.");
 			hasError = true;
 		}
+		else
+			newCreditCardNo = Long.parseLong(creditCardNo);
 		if (zipcode.length() != 5) {
 			request.setAttribute("zipcodeLengthError",
 					"zipcode must be exactly 5 digits.");
@@ -180,7 +183,7 @@ public class UserRegistration extends HttpServlet {
 			hasError = true;
 		} else
 			newSeatNo = Integer.parseInt(seatNo);
-		CreditCardEntry creditCard = new CreditCardEntry(creditCardId++, creditCardNo,
+		CreditCardEntry creditCard = new CreditCardEntry(creditCardId++, newCreditCardNo,
 				newExpirationTime, securityCode, address, city, state, zipcode);
 		List<CreditCardEntry> creditCards = (List<CreditCardEntry>) getServletContext()
 				.getAttribute("creditCards");
