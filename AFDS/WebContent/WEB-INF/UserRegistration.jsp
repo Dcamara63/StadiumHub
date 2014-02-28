@@ -117,8 +117,11 @@
 		<c:if test="${not empty lastNameEmptyError}">
 		${lastNameEmptyError}<br />
 		</c:if>
-		<c:if test="${ageEmptyError}">
+		<c:if test="${not empty ageEmptyError}">
 		${ageEmptyError}<br />
+		</c:if>
+		<c:if test="${not empty genderNotSelectedError}">
+		${genderNotSelectedError}<br />
 		</c:if>
 		<c:if test="${not empty creditCardLengthError}">
 		${creditCardLengthError}<br />

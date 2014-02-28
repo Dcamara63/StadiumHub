@@ -23,7 +23,7 @@ import afds.model.UserProfileEntry;
 public class UserRegistration extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	Integer id = 0;
+	Integer creditCardId = 0, seatId = 0, userProfileId = 0;
 
 	public UserRegistration() {
 		super();
@@ -31,6 +31,10 @@ public class UserRegistration extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
+		List<CreditCardEntry> creditCards = new ArrayList<CreditCardEntry>();
+		getServletContext().setAttribute("creditCards", creditCards);
+		List<LocationEntry> locations = new ArrayList<LocationEntry>();
+		getServletContext().setAttribute("locations", locations);
 		List<UserProfileEntry> userProfiles = new ArrayList<UserProfileEntry>();
 		getServletContext().setAttribute("userProfiles", userProfiles);
 	}
@@ -108,6 +112,10 @@ public class UserRegistration extends HttpServlet {
 			hasError = true;
 		} else
 			newAge = Integer.parseInt(age);
+		if (gender == null) {
+			request.setAttribute("genderNotSelectedError", "Please select a gender.");
+			hasError = true;
+		}
 		if (creditCardNo.length() != 16) {
 			request.setAttribute("creditCardLengthError",
 					"Credit card number must be exactly 16 digits.");
@@ -156,27 +164,33 @@ public class UserRegistration extends HttpServlet {
 		}
 		if (sectionNo.isEmpty()) {
 			request.setAttribute("sectionNoEmptyError",
-					"Section Number filed is empty.");
+					"Section number filed is empty.");
 			hasError = true;
 		} else
 			newSectionNo = Integer.parseInt(sectionNo);
 		if (rowNo.isEmpty()) {
 			request.setAttribute("rowNoEmptyError",
-					"Row Number filed is empty.");
+					"Row number filed is empty.");
 			hasError = true;
 		} else
 			newRowNo = Integer.parseInt(rowNo);
 		if (seatNo.isEmpty()) {
 			request.setAttribute("seatNoEmptyError",
-					"Seat Number filed is empty.");
+					"Seat number filed is empty.");
 			hasError = true;
 		} else
 			newSeatNo = Integer.parseInt(seatNo);
-		CreditCardEntry creditCard = new CreditCardEntry(id++, creditCardNo,
+		CreditCardEntry creditCard = new CreditCardEntry(creditCardId++, creditCardNo,
 				newExpirationTime, securityCode, address, city, state, zipcode);
-		LocationEntry location = new LocationEntry(id++, newSectionNo,
+		List<CreditCardEntry> creditCards = (List<CreditCardEntry>) getServletContext()
+				.getAttribute("creditCards");
+		creditCards.add(creditCard);
+		LocationEntry location = new LocationEntry(seatId++, newSectionNo,
 				newRowNo, newSeatNo);
-		UserProfileEntry userProfile = new UserProfileEntry(id++, username,
+		List<LocationEntry> locations = (List<LocationEntry>) getServletContext()
+				.getAttribute("locations");
+		locations.add(location);
+		UserProfileEntry userProfile = new UserProfileEntry(userProfileId++, username,
 				password, firstName, lastName, newAge, gender, creditCard,
 				location);
 		List<UserProfileEntry> userProfiles = (List<UserProfileEntry>) getServletContext()

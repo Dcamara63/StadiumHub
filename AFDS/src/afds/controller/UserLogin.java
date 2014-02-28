@@ -39,33 +39,18 @@ public class UserLogin extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		List<UserProfileEntry> registrations = (List<UserProfileEntry>) getServletContext()
 				.getAttribute("registrations");
-		if (request.getParameter("username").equals("cysun")
-				&& request.getParameter("password").equals("abcd")) {
-			request.getSession().setAttribute("user", "cysun");
-			response.sendRedirect("DisplayCourses");
-		} else if (request.getParameter("username").equals("cs320stu31")
-				&& request.getParameter("password").equals("abcd")) {
-			request.getSession().setAttribute("user", "cs320stu31");
-			response.sendRedirect("OrderConfirmation");
-		} else if (!(request.getParameter("username").equals("cysun"))
-				&& !(request.getParameter("password").equals("abcd"))
-				|| !(request.getParameter("username").equals("cs320stu31"))
-				&& !(request.getParameter("password").equals("abcd")))
-			for (UserProfileEntry registration : registrations) {
-				if (request.getParameter("username").equals(
-						registration.getUsername())
-						&& request.getParameter("password").equals(
-								registration.getPassword())) {
-					request.getSession().setAttribute("user",
-							registration.getUsername());
-					response.sendRedirect("OrderConfirmation");
-				}
-				response.sendRedirect("UserLogin");
-			}
-		else if (registrations.isEmpty())
+		if (registrations.isEmpty())
 			doGet(request, response);
-		else
-			response.sendRedirect("UserLogin");
+		for (UserProfileEntry registration : registrations) {
+			if (request.getParameter("username").equals(
+					registration.getUsername())
+					&& request.getParameter("password").equals(
+							registration.getPassword())) {
+				request.getSession().setAttribute("user",
+						registration.getUsername());
+				response.sendRedirect("OrderConfirmation");
+			} else
+				response.sendRedirect("UserLogin");
+		}
 	}
-
 }

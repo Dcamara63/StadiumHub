@@ -47,13 +47,13 @@ public class OrderReview extends HttpServlet {
 			// products.getName();
 			for (LocationEntry location : locations) {
 				if (location.getSeatId() % 2 == 1) {
-					Kitchen1Entry order = new Kitchen1Entry(id++, products);
+					Kitchen1Entry order = new Kitchen1Entry(id++, products, location);
 					List<Kitchen1Entry> orders = (List<Kitchen1Entry>) getServletContext()
 							.getAttribute("orders");
 					orders.add(order);
 				}
 				if (location.getSeatId() % 2 == 0) {
-					Kitchen2Entry order = new Kitchen2Entry(id++, products);
+					Kitchen2Entry order = new Kitchen2Entry(id++, products, location);
 					List<Kitchen2Entry> orders = (List<Kitchen2Entry>) getServletContext()
 							.getAttribute("orders");
 					orders.add(order);

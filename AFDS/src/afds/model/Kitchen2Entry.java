@@ -5,10 +5,12 @@ import java.util.List;
 public class Kitchen2Entry {
 	Integer orderId;
 	List<String> products;
+	LocationEntry location;
 
-	public Kitchen2Entry(Integer orderId, List<String> products) {
+	public Kitchen2Entry(Integer orderId, List<String> products, LocationEntry location) {
 		this.orderId = orderId;
 		this.products = products;
+		this.location = location;
 	}
 
 	public Integer getOrderId() {
@@ -27,4 +29,11 @@ public class Kitchen2Entry {
 		this.products = products;
 	}
 
+	public LocationEntry getLocation() {
+		return location;
+	}
+
+	public void setLocation(LocationEntry location) {
+		this.location = location;
+	}
 }
