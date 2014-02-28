@@ -24,8 +24,8 @@ public class UserLogin extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		List<UserProfileEntry> registrations = new ArrayList<UserProfileEntry>();
-		getServletContext().setAttribute("registrations", registrations);
+		List<UserProfileEntry> userProfiles = new ArrayList<UserProfileEntry>();
+		getServletContext().setAttribute("userProfiles", userProfiles);
 	}
 
 	protected void doGet(HttpServletRequest request,
@@ -37,17 +37,17 @@ public class UserLogin extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<UserProfileEntry> registrations = (List<UserProfileEntry>) getServletContext()
-				.getAttribute("registrations");
-		if (registrations.isEmpty())
+		List<UserProfileEntry> userProfiles = (List<UserProfileEntry>) getServletContext()
+				.getAttribute("userProfiles");
+		if (userProfiles.isEmpty())
 			doGet(request, response);
-		for (UserProfileEntry registration : registrations) {
+		for (UserProfileEntry userProfile : userProfiles) {
 			if (request.getParameter("username").equals(
-					registration.getUsername())
+					userProfile.getUsername())
 					&& request.getParameter("password").equals(
-							registration.getPassword())) {
+							userProfile.getPassword())) {
 				request.getSession().setAttribute("user",
-						registration.getUsername());
+						userProfile.getUsername());
 				response.sendRedirect("OrderConfirmation");
 			} else
 				response.sendRedirect("UserLogin");
