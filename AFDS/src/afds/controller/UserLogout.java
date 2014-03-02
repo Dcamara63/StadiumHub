@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/UserLogout")
+public class UserLogout extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
 

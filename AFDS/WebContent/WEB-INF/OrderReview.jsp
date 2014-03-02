@@ -10,7 +10,7 @@
 <body>
 	<form action="OrderReview" method="post">
 		Please review the items you ordered before placing the order. You can
-		always go back to the menu to add or delete items by clicking the
+		always go back to the menu to add items by clicking the
 		"Back to the Menu" button.<br />
 		<table border='1'>
 			<tr>

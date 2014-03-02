@@ -175,6 +175,5 @@ th,td {
 		${usernameExistsError}<br />
 		</c:if>
 	</form>
-	</style>
 </body>
 </html>

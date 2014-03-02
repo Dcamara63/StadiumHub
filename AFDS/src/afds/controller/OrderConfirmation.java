@@ -55,7 +55,7 @@ public class OrderConfirmation extends HttpServlet {
 				}
 			}
 		}
-			response.sendRedirect("Logout");
+			response.sendRedirect("UserLogout");
 	}
 
 }
