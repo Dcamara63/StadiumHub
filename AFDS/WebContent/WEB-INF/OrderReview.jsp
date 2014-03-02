@@ -19,7 +19,7 @@
 				<th>Price</th>
 				<th>Quantity</th>
 			</tr>
-			<c:forEach items="${entries}" var="entry" varStatus="status">
+			<c:forEach items="${products}" var="entry" varStatus="status">
 				<tr>
 					<td>${entry.productId}</td>
 					<td>${entry.name}</td>

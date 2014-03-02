@@ -2,11 +2,15 @@ package afds.model;
 
 public class ProductEntry {
 
-	Integer productId;
+	long productId;
 	String name, description, filePath;
 	Double price;
 
-	public ProductEntry(Integer productId, String name, String description,
+	public ProductEntry(){
+		
+	}
+	
+	public ProductEntry(long productId, String name, String description,
 			Double price, String filePath) {
 		this.productId = productId;
 		this.name = name;
@@ -15,11 +19,11 @@ public class ProductEntry {
 		this.filePath = filePath;
 	}
 
-	public void setProductId(Integer productId) {
+	public void setProductId(long productId) {
 		this.productId = productId;
 	}
 
-	public Integer getProductId() {
+	public long getProductId() {
 		return productId;
 	}
 

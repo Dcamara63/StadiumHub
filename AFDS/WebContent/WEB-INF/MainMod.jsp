@@ -8,7 +8,7 @@
 </head>
 <body>
 <p>
-<a href = "Login">
+<a href = "UserLogin">
 <img src="images/dodgers_login.png" alt="Login" width="468" height="216" border="0">
 </a>
 <a href = "login.html">

@@ -12,7 +12,6 @@
 		Thanks you for choosing our food stand as your dining choice. Your
 		order has been sent to the nearest kitchen. Food will arrive shortly.
 		Enjoy!<br /> <input type="submit" name="exit" value="Exit" />
-		<c:remove var="user" scope="session" />
 	</form>
 </body>
 </html>

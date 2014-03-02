@@ -118,7 +118,7 @@ th,td {
 		${passowrdEmptyError}<br />
 		</c:if>
 		<c:if test="${not empty retypePassowrdDoesNotMatchError}">
-		${passowrdEmptyError}<br />
+		${retypePassowrdDoesNotMatchError}<br />
 		</c:if>
 		<c:if test="${not empty retypePassowrdDoesNotMatchError}">
 		${creditCardLengthError}<br />

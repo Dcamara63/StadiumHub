@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import afds.model.Kitchen1Entry;
-import afds.model.Kitchen2Entry;
-import afds.model.LocationEntry;
 import afds.model.ProductEntry;
 
 @WebServlet("/OrderReview")
@@ -35,30 +32,11 @@ public class OrderReview extends HttpServlet {
 				request, response);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("backToTheMenu") != null)
 			response.sendRedirect("Menu");
 		if (request.getParameter("placingTheOrder") != null) {
-			List<LocationEntry> locations = new ArrayList<LocationEntry>();
-			getServletContext().setAttribute("locations", locations);
-			List<String> products = new ArrayList<String>();
-			// products.getName();
-			for (LocationEntry location : locations) {
-				if (location.getSeatId() % 2 == 1) {
-					Kitchen1Entry order = new Kitchen1Entry(id++, products, location);
-					List<Kitchen1Entry> orders = (List<Kitchen1Entry>) getServletContext()
-							.getAttribute("orders");
-					orders.add(order);
-				}
-				if (location.getSeatId() % 2 == 0) {
-					Kitchen2Entry order = new Kitchen2Entry(id++, products, location);
-					List<Kitchen2Entry> orders = (List<Kitchen2Entry>) getServletContext()
-							.getAttribute("orders");
-					orders.add(order);
-				}
-			}
 			response.sendRedirect("UserLogin");
 		}
 	}

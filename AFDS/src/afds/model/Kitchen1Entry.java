@@ -1,15 +1,13 @@
 package afds.model;
 
-import java.util.List;
-
 public class Kitchen1Entry {
 	Integer orderId;
-	List<String> products;
+	OrderEntry order;
 	LocationEntry location;
 
-	public Kitchen1Entry(Integer orderId, List<String> products, LocationEntry location) {
+	public Kitchen1Entry(Integer orderId, OrderEntry order, LocationEntry location) {
 		this.orderId = orderId;
-		this.products = products;
+		this.order = order;
 		this.location = location;
 	}
 
@@ -21,12 +19,12 @@ public class Kitchen1Entry {
 		this.orderId = orderId;
 	}
 
-	public List<String> getProducts() {
-		return products;
+	public OrderEntry getOrder() {
+		return order;
 	}
 
-	public void setProducts(List<String> products) {
-		this.products = products;
+	public void setOrder(OrderEntry order) {
+		this.order = order;
 	}
 
 	public LocationEntry getLocation() {

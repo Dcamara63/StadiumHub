@@ -61,6 +61,11 @@ public class UserRegistration extends HttpServlet {
 		String expirationTime = request.getParameter("expirationTime");
 		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 		Date newExpirationTime = null;
+		try {
+			newExpirationTime = formatter.parse(expirationTime);
+		} catch (ParseException e1) {
+			e1.printStackTrace();
+		}
 		String securityCode = request.getParameter("securityCode");
 		String address = request.getParameter("address");
 		String city = request.getParameter("city");
