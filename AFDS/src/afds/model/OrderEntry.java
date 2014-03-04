@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class OrderEntry {
 
-	long orderId, userId;
+	private long orderId, userId, locationId;
 	private ArrayList<OrderItem> orderItemList;
 	private Double orderTotal;
 	private int orderItemTotal = 0;
 	private Boolean completedOrder = false;
+
+
 
 	public OrderEntry(){
 		
@@ -67,6 +69,15 @@ public class OrderEntry {
 	public void setCompletedOrder(Boolean completedOrder) {
 		this.completedOrder = completedOrder;
 	}
+
+	public long getLocationId() {
+		return locationId;
+	}
+
+	public void setLocationId(long locationId) {
+		this.locationId = locationId;
+	}
+	
 
 
 }

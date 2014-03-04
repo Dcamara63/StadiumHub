@@ -1,12 +1,13 @@
 package afds.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -15,9 +16,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import afds.model.CreditCardEntry;
-import afds.model.LocationEntry;
-import afds.model.UserProfileEntry;
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+
+import webservice.WebService;
+import afds.model.*;
 
 @WebServlet("/UserRegistration")
 public class UserRegistration extends HttpServlet {
@@ -31,12 +33,6 @@ public class UserRegistration extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		List<CreditCardEntry> creditCards = new ArrayList<CreditCardEntry>();
-		getServletContext().setAttribute("creditCards", creditCards);
-		List<LocationEntry> locations = new ArrayList<LocationEntry>();
-		getServletContext().setAttribute("locations", locations);
-		List<UserProfileEntry> userProfiles = new ArrayList<UserProfileEntry>();
-		getServletContext().setAttribute("userProfiles", userProfiles);
 	}
 
 	protected void doGet(HttpServletRequest request,
@@ -57,26 +53,17 @@ public class UserRegistration extends HttpServlet {
 		Integer newAge = null;
 		String gender = request.getParameter("gender");
 		String creditCardNo = request.getParameter("creditCardNo");
-		Long newCreditCardNo = null;
 		String expirationTime = request.getParameter("expirationTime");
-		DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-		Date newExpirationTime = null;
-		try {
-			newExpirationTime = formatter.parse(expirationTime);
-		} catch (ParseException e1) {
-			e1.printStackTrace();
-		}
 		String securityCode = request.getParameter("securityCode");
 		String address = request.getParameter("address");
 		String city = request.getParameter("city");
 		String state = request.getParameter("state");
 		String zipcode = request.getParameter("zipcode");
-		String sectionNo = request.getParameter("sectionNo");
-		Integer newSectionNo = null;
-		String rowNo = request.getParameter("rowNo");
-		Integer newRowNo = null;
-		String seatNo = request.getParameter("seatNo");
-		Integer newSeatNo = null;
+		WebService service = new WebService();
+		List<CreditCardEntry> creditCards = (List<CreditCardEntry>) getServletContext()
+				.getAttribute("creditCards");
+		List<UserProfileEntry> userProfiles = (List<UserProfileEntry>) getServletContext()
+				.getAttribute("userProfiles");
 		boolean hasError = false;
 		if (username.length() < 4) {
 			request.setAttribute("usernameLengthError",
@@ -119,36 +106,24 @@ public class UserRegistration extends HttpServlet {
 		} else
 			newAge = Integer.parseInt(age);
 		if (gender == null) {
-			request.setAttribute("genderNotSelectedError", "Please select a gender.");
+			request.setAttribute("genderNotSelectedError",
+					"Please select a gender.");
 			hasError = true;
 		}
-		if (creditCardNo.length() != 16) {
-			request.setAttribute("creditCardLengthError",
-					"Credit card number must be exactly 16 digits.");
-			hasError = true;
-		}
-		else if (creditCardNo.isEmpty()) {
+		if (creditCardNo.isEmpty()) {
 			request.setAttribute("creditCardNoEmptyError",
 					"Credit card number filed is empty.");
 			hasError = true;
-		}
-		else
-			newCreditCardNo = Long.parseLong(creditCardNo);
-		if (zipcode.length() != 5) {
-			request.setAttribute("zipcodeLengthError",
-					"zipcode must be exactly 5 digits.");
+		} else if (creditCardNo.length() != 16) {
+			request.setAttribute("creditCardLengthError",
+					"Credit card number must be exactly 16 digits.");
 			hasError = true;
 		}
 		if (expirationTime.isEmpty()) {
 			request.setAttribute("expirationTimeEmptyError",
 					"Expiration time filed is empty.");
 			hasError = true;
-		} else
-			try {
-				newExpirationTime = formatter.parse(expirationTime);
-			} catch (ParseException e) {
-				e.printStackTrace();
-			}
+		}	
 		if (securityCode.isEmpty()) {
 			request.setAttribute("securityCodeEmptyError",
 					"Security code filed is empty.");
@@ -169,51 +144,42 @@ public class UserRegistration extends HttpServlet {
 		if (zipcode.isEmpty()) {
 			request.setAttribute("zipcodeEmptyError", "Zipcode filed is empty.");
 			hasError = true;
+		} else if (zipcode.length() != 5) {
+			request.setAttribute("zipcodeLengthError",
+					"zipcode must be exactly 5 digits.");
+			hasError = true;
 		}
-		if (sectionNo.isEmpty()) {
-			request.setAttribute("sectionNoEmptyError",
-					"Section number filed is empty.");
-			hasError = true;
-		} else
-			newSectionNo = Integer.parseInt(sectionNo);
-		if (rowNo.isEmpty()) {
-			request.setAttribute("rowNoEmptyError",
-					"Row number filed is empty.");
-			hasError = true;
-		} else
-			newRowNo = Integer.parseInt(rowNo);
-		if (seatNo.isEmpty()) {
-			request.setAttribute("seatNoEmptyError",
-					"Seat number filed is empty.");
-			hasError = true;
-		} else
-			newSeatNo = Integer.parseInt(seatNo);
-		CreditCardEntry creditCard = new CreditCardEntry(creditCardId++, newCreditCardNo,
-				newExpirationTime, securityCode, address, city, state, zipcode);
-		List<CreditCardEntry> creditCards = (List<CreditCardEntry>) getServletContext()
-				.getAttribute("creditCards");
-		creditCards.add(creditCard);
-		LocationEntry location = new LocationEntry(seatId++, newSectionNo,
-				newRowNo, newSeatNo);
-		List<LocationEntry> locations = (List<LocationEntry>) getServletContext()
-				.getAttribute("locations");
-		locations.add(location);
-		UserProfileEntry userProfile = new UserProfileEntry(userProfileId++, username,
-				password, firstName, lastName, newAge, gender, creditCard,
-				location);
-		List<UserProfileEntry> userProfiles = (List<UserProfileEntry>) getServletContext()
-				.getAttribute("userProfiles");
+
 		for (UserProfileEntry entry : userProfiles)
 			if (username.equals(entry.getUsername())) {
 				request.setAttribute("usernameExistsError",
 						"This username is already taken!");
 				hasError = true;
 			}
+
 		if (hasError) {
 			doGet(request, response);
 			return;
+		} else {
+
+			CreditCardEntry creditCard = service
+					.addCreditCardEntry(new CreditCardEntry(creditCardNo,
+							expirationTime, securityCode, address, city, state,
+							zipcode));
+			creditCards.add(creditCard);
+
+			File file = new File(getServletContext().getRealPath(
+					"/WEB-INF/seat_id.txt"));
+			Scanner input = new Scanner(file);
+			Long seatId = Long.parseLong(input.next());
+
+			UserProfileEntry userProfile = service
+					.addUserEntry(new UserProfileEntry(username, password,
+							firstName, lastName, newAge, gender, creditCard
+									.getCreditCardId(), seatId));
+			userProfiles.add(userProfile);
+			response.sendRedirect("UserLogin");
 		}
-		userProfiles.add(userProfile);
-		response.sendRedirect("UserLogin");
+
 	}
 }

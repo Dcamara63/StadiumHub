@@ -2,21 +2,26 @@ package afds.model;
 
 public class LocationEntry {
 
-	Integer seatId, sectionNo, rowNo, seatNo;
+	long seatId;
+	Integer sectionNo, rowNo;
+	char seat;
+	int kitchen;
 
-	public LocationEntry(Integer seatId, Integer sectionNo, Integer rowNo,
-			Integer seatNo) {
-		this.seatId = seatId;
+	public LocationEntry(Integer sectionNo, Integer rowNo,
+			String seatNo) {
 		this.sectionNo = sectionNo;
 		this.rowNo = rowNo;
-		this.seatNo = seatNo;
+		this.seat = seatNo.charAt(0);
+		
 	}
 
-	public void setSeatId(Integer seatId) {
+	public LocationEntry() {}
+
+	public void setSeatId(long seatId) {
 		this.seatId = seatId;
 	}
 
-	public Integer getSeatId() {
+	public long getSeatId() {
 		return seatId;
 	}
 
@@ -36,12 +41,22 @@ public class LocationEntry {
 		return rowNo;
 	}
 
-	public void setSeatNo(Integer seatNo) {
-		this.seatNo = seatNo;
+	public void setSeat(char seat) {
+		this.seat = seat;
 	}
 
-	public Integer getSeatNo() {
-		return seatNo;
+	public char getSeat() {
+		return seat;
 	}
+
+	public int getKitchen() {
+		return kitchen;
+	}
+
+	public void setKitchen(int kitchen) {
+		this.kitchen = kitchen;
+	}
+	
+
 
 }

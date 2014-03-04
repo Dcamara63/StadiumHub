@@ -2,27 +2,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>User Registration</title>
-<style>
-table,th,td {
-	border: 1px solid black;
-	border-collapse: collapse
-}
-
-th,td {
-	padding: 5px;
-}
-</style>
-
 </head>
 <body>
 	<form action="UserRegistration" method="post">
-		<table>
+		<table border="1" cellpadding="2" cellspacing="2">
 			<tbody>
 				<tr>
 					<td>Username:</td>
@@ -61,7 +49,7 @@ th,td {
 					<td><input name="creditCardNo" type="text" /></td>
 				</tr>
 				<tr>
-					<td>Expiration Time (MM/dd/yyyy):</td>
+					<td>Expiration Time (MM/yyyy):</td>
 					<td><input name="expirationTime" type="text" /></td>
 				</tr>
 				<tr>
@@ -85,21 +73,6 @@ th,td {
 					<td>Zipcode:</td>
 					<td><input name="zipcode" type="text" /></td>
 				</tr>
-				<tr>
-					<td><b>Seating Information</b></td>
-				</tr>
-				<tr>
-					<td>Section Number:</td>
-					<td><input name="sectionNo" type="text" /></td>
-				</tr>
-				<tr>
-					<td>Row Number:</td>
-					<td><input name="rowNo" type="text" /></td>
-				</tr>
-				<tr>
-					<td>Seat Number:</td>
-					<td><input name="seatNo" type="text" /></td>
-				</tr>
 			</tbody>
 		</table>
 		<p>
@@ -118,7 +91,7 @@ th,td {
 		${passowrdEmptyError}<br />
 		</c:if>
 		<c:if test="${not empty retypePassowrdDoesNotMatchError}">
-		${retypePassowrdDoesNotMatchError}<br />
+		${passowrdEmptyError}<br />
 		</c:if>
 		<c:if test="${not empty retypePassowrdDoesNotMatchError}">
 		${creditCardLengthError}<br />
@@ -161,18 +134,6 @@ th,td {
 		</c:if>
 		<c:if test="${not empty zipcodeEmptyError}">
 		${zipcodeEmptyError}<br />
-		</c:if>
-		<c:if test="${not empty sectionNoEmptyError}">
-		${sectionNoEmptyError}<br />
-		</c:if>
-		<c:if test="${not empty rowNoEmptyError}">
-		${rowNoEmptyError}<br />
-		</c:if>
-		<c:if test="${not empty seatNoEmptyError}">
-		${seatNoEmptyError}<br />
-		</c:if>
-		<c:if test="${not empty usernameExistsError}">
-		${usernameExistsError}<br />
 		</c:if>
 	</form>
 </body>

@@ -9,9 +9,9 @@
 <body>
 <p>
 <a href = "UserLogin">
-<img src="images/dodgers_login.png" alt="Login" width="468" height="216" border="0">
+<img src="images/dodgers_login.jpg" alt="Login" width="468" height="216" border="0">
 </a>
-<a href = "login.html">
+<a href = "Menu">
 <img src="images/food_drinks.png" alt="Food&Drinks" width="468" height="216" border="0">
 </a>
 <a href = "login.html">

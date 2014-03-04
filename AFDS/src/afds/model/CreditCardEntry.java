@@ -4,53 +4,54 @@ import java.util.Date;
 
 public class CreditCardEntry {
 
-	Integer creditCardId;
-	Long creditCardNo;
-	String securityCode, address, city, state, zipcode;
-	Date expirationTime;
+	long creditCardId , creditCardNo;
+	Integer securityCode, zipcode;
+	String address, city, state, expirationTime;
 	
-	public CreditCardEntry(Integer creditCardId, Long creditCardNo,
-			Date expirationTime, String securityCode, String address,
+	public CreditCardEntry(String creditCardNo,
+			String expirationTime, String securityCode, String address,
 			String city, String state, String zipcode) {
-		this.creditCardId = creditCardId;
-		this.creditCardNo = creditCardNo;
+		this.creditCardNo = Long.parseLong(creditCardNo);
 		this.expirationTime = expirationTime;
-		this.securityCode = securityCode;
+		this.securityCode = Integer.parseInt(securityCode);
 		this.address = address;
 		this.city = city;
 		this.state = state;
-		this.zipcode = zipcode;
+		this.zipcode = Integer.parseInt(zipcode);
 	}
 
-	public Integer getCreditCardId() {
+	public CreditCardEntry() {}
+
+	public long getCreditCardId() {
 		return creditCardId;
 	}
 
-	public void setCreditCardId(Integer creditCardId) {
+	public void setCreditCardId(long creditCardId) {
 		this.creditCardId = creditCardId;
 	}
 
-	public Long getCreditCardNo() {
+	public long getCreditCardNo() {
 		return creditCardNo;
 	}
 
-	public void setCreditCardNo(Long creditCardNo) {
-		this.creditCardNo = creditCardNo;
+	public void setCreditCardNo(String creditCardNo) {
+		
+		this.creditCardNo = Long.parseLong(creditCardNo);
 	}
 
-	public Date getExpirationTime() {
+	public String getExpirationTime() {
 		return expirationTime;
 	}
 
-	public void setExpirationTime(Date expirationTime) {
+	public void setExpirationTime(String expirationTime) {
 		this.expirationTime = expirationTime;
 	}
 
-	public String getSecurityCode() {
+	public int getSecurityCode() {
 		return securityCode;
 	}
 
-	public void setSecurityCode(String securityCode) {
+	public void setSecurityCode(int securityCode) {
 		this.securityCode = securityCode;
 	}
 
@@ -78,11 +79,11 @@ public class CreditCardEntry {
 		this.state = state;
 	}
 
-	public String getZipcode() {
+	public int getZipcode() {
 		return zipcode;
 	}
 
-	public void setZipcode(String zipcode) {
+	public void setZipcode(int zipcode) {
 		this.zipcode = zipcode;
 	}
 

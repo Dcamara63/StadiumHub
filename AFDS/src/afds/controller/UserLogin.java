@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import afds.model.UserProfileEntry;
+import afds.model.*;
 
 @WebServlet("/UserLogin")
 public class UserLogin extends HttpServlet {
@@ -24,8 +24,8 @@ public class UserLogin extends HttpServlet {
 
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		List<UserProfileEntry> userProfiles = new ArrayList<UserProfileEntry>();
-		getServletContext().setAttribute("userProfiles", userProfiles);
+		List<UserProfileEntry> registrations = new ArrayList<UserProfileEntry>();
+		getServletContext().setAttribute("registrations", registrations);
 	}
 
 	protected void doGet(HttpServletRequest request,
@@ -37,20 +37,35 @@ public class UserLogin extends HttpServlet {
 	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<UserProfileEntry> userProfiles = (List<UserProfileEntry>) getServletContext()
-				.getAttribute("userProfiles");
-		if (userProfiles.isEmpty())
-			doGet(request, response);
-		for (UserProfileEntry userProfile : userProfiles) {
-			if (request.getParameter("username").equals(
-					userProfile.getUsername())
-					&& request.getParameter("password").equals(
-							userProfile.getPassword())) {
-				request.getSession().setAttribute("user",
-						userProfile.getUsername());
-				response.sendRedirect("OrderConfirmation");
-			} else
+		List<UserProfileEntry> registrations = (List<UserProfileEntry>) getServletContext()
+				.getAttribute("registrations");
+		if (request.getParameter("username").equals("cysun")
+				&& request.getParameter("password").equals("abcd")) {
+			request.getSession().setAttribute("user", "cysun");
+			response.sendRedirect("DisplayCourses");
+		} else if (request.getParameter("username").equals("cs320stu31")
+				&& request.getParameter("password").equals("abcd")) {
+			request.getSession().setAttribute("user", "cs320stu31");
+			response.sendRedirect("DisplayCourses");
+		} else if (!(request.getParameter("username").equals("cysun"))
+				&& !(request.getParameter("password").equals("abcd"))
+				|| !(request.getParameter("username").equals("cs320stu31"))
+				&& !(request.getParameter("password").equals("abcd")))
+			for (UserProfileEntry registration : registrations) {
+				if (request.getParameter("username").equals(
+						registration.getUsername())
+						&& request.getParameter("password").equals(
+								registration.getPassword())) {
+					request.getSession().setAttribute("user",
+							registration.getUsername());
+					response.sendRedirect("DisplayCourses");
+				}
 				response.sendRedirect("UserLogin");
-		}
+			}
+		else if (registrations.isEmpty())
+			doGet(request, response);
+		else
+			response.sendRedirect("UserLogin");
 	}
+
 }

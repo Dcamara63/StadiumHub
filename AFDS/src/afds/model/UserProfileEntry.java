@@ -2,38 +2,82 @@ package afds.model;
 
 public class UserProfileEntry {
 
-	Integer id, age;
-	String username, password, firstName, lastName, gender;
-	CreditCardEntry creditCard;
-	LocationEntry location;
-
-	public UserProfileEntry(Integer id, String username, String password, String firstName, String lastName,
-			Integer age, String gender, CreditCardEntry creditCard, LocationEntry location) {
-		this.id = id;
-		this.username = username;
-		this.password = password;
+	Integer age;
+	Long id, creditCardId, seatId;
+	String firstName, lastName, username, password;
+	char gender;
+	
+	public UserProfileEntry() {
+		
+	}
+	
+	public UserProfileEntry(String username, String password, String firstName, String lastName,
+			Integer age, String gender, Long creditCardId, Long seatId) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
-		this.gender = gender;
-		this.creditCard = creditCard;
-		this.location = location;
+		this.gender = gender.charAt(0);
+		this.creditCardId = creditCardId;
+		this.seatId = seatId;
+		this.username = username;
+		this.password = password;
 	}
 
-	public Integer getId() {
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
 	public Integer getAge() {
 		return age;
 	}
 
-	public void setAge(Integer age) {
-		this.age = age;
+	public void setGender(String gender) {
+		this.gender = gender.charAt(0);
+	}
+
+	public char getGender() {
+		return gender;
+	}
+
+	public void setCreditCardId(String creditCardId) {
+		this.creditCardId = Long.parseLong(creditCardId);
+	}
+
+	public Long getCreditCardId() {
+		return creditCardId;
+	}
+
+	public void setSeatId(Long seatId) {
+		this.seatId = seatId;
+	}
+
+	public Long getSeatId() {
+		return seatId;
 	}
 
 	public String getUsername() {
@@ -50,46 +94,6 @@ public class UserProfileEntry {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public void setGender(String gender) {
-		this.gender = gender;
-	}
-
-	public CreditCardEntry getCreditCard() {
-		return creditCard;
-	}
-
-	public void setCreditCard(CreditCardEntry creditCard) {
-		this.creditCard = creditCard;
-	}
-
-	public LocationEntry getLocation() {
-		return location;
-	}
-
-	public void setLocation(LocationEntry location) {
-		this.location = location;
 	}
 
 }
